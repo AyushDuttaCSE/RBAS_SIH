@@ -6,6 +6,7 @@ import InteractiveMap from "./components/InteractiveMap";
 import AdvisoryReportView from "./components/AdvisoryReportView";
 import DprPdfGenerator from "./components/DprPdfGenerator";
 import { competitorsDensity, generateFeasibility } from "./api/client";
+import FutureScopePage from './components/FutureScopePage';
 
 const queryClient = new QueryClient();
 
@@ -275,34 +276,39 @@ function Wizard() {
 
   return (
     <div className="max-w-4xl mx-auto px-5 py-10 space-y-6 font-body">
-      <header class= "topbar">
-        <div class="brand">
-          <img src="https://i.postimg.cc/rmFsbCGX/RBAS-logo.jpg" alt="Logo" class="logo-img"></img>
-          <h1 class="name" data-i18n="brand_name">Rural Business Advisory System</h1>
+      <header className="topbar">
+        <div className="brand">
+          <img src="https://i.postimg.cc/rmFsbCGX/RBAS-logo.jpg" alt="Logo" className="logo-img"></img>
+          <h1 className="name" data-i18n="brand_name">Rural Business Advisory System</h1>
         </div>
-        <select id="langSelect"
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-        >
-          <option value="en">English</option>
-          <option value="hi">हिन्दी</option>
-          <option value="bn">বাংলা</option>
-          <option value="mr">मराठी</option>
-          <option value="ta">தமிழ்</option>
-          <option value="te">తెలుగు</option>
-        </select>
+        
+        {/* Router link removed from here */}
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          
+          <select id="langSelect"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="bn">বাংলা</option>
+            <option value="mr">मराठी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+        </div>
       </header>
-      <section class="hero">
-  <div class="hero-inner">
+      <section className="hero">
+  <div className="hero-inner">
     <h1 data-i18n="hero_title">Turn a small margin into a bankable business plan.</h1>
     <p data-i18n="hero_sub">Enter your available capital and location — get a deterministic loan structure, a live map of nearby competitors from OpenStreetMap, and a feasibility report you can carry to a bank.</p>
   </div>
 </section>
 
       <section className="bg-white border border-paper-dk rounded-xl p-6 space-y-4 shadow-sm">
-        <div class="panel">
-    <h2><span class="step-num">1</span><span data-i18n="wizard_title">Business Enquiry</span></h2>
-    <div class="sub" data-i18n="wizard_sub">Tell us where and what you want to start — the math and the map do the rest.</div>
+        <div className="panel">
+    <h2><span className="step-num">1</span><span data-i18n="wizard_title">Business Enquiry</span></h2>
+    <div className="sub" data-i18n="wizard_sub">Tell us where and what you want to start — the math and the map do the rest.</div>
           
           <button
             type="button"
@@ -315,7 +321,7 @@ function Wizard() {
           </button>
         </div>
 
-        <div class="grid3">
+        <div className="grid3">
           <Field
             label="Village / Town"
             value={form.village}
@@ -327,12 +333,12 @@ function Wizard() {
             onChange={(v) => setForm((prev) => ({ ...prev, block: v }))}
           />
           <Field
-            label="District"             
+            label="District"            
             value={form.district}
             onChange={(v) => setForm((prev) => ({ ...prev, district: v }))}
           />
           <Field
-            label="State"             
+            label="State"            
             value={form.state}
             onChange={(v) => setForm((prev) => ({ ...prev, state: v }))}
           />
@@ -390,8 +396,8 @@ function Wizard() {
       <FinancialCalculatorWidget onStructureChange={handleStructureChange} />
 
       <section className="bg-white border border-paper-dk rounded-xl p-6 shadow-sm">
-        <div class="panel">
-        <h2><span class="step-num">3</span><span data-i18n="wizard_title">Hyper-local competitor map</span></h2>
+        <div className="panel">
+        <h2><span className="step-num">3</span><span data-i18n="wizard_title">Hyper-local competitor map</span></h2>
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs text-gray-500 font-mono">
             Lat: {center.lat.toFixed(4)}, Lon: {center.lon.toFixed(4)}
@@ -470,6 +476,11 @@ function Wizard() {
           </section>
         </div>
       )}
+
+      {/* Ekdom niche Future Scope add kora holo */}
+      <div className="mt-12 border-t border-gray-200 pt-8 w-full">
+          <FutureScopePage />
+      </div>
     </div>
   );
 }
@@ -488,6 +499,7 @@ function Field({ label, value, onChange, placeholder = "" }) {
   );
 }
 
+// Router bad dewa holo
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
